@@ -16,22 +16,22 @@ namespace Geometry1
 
 	struct GeometryDesc
 	{
-		uint32_t m_version;///< <c>0x00</c>: always 0x35 ?
-		uint32_t m_isForeground;///< <c>0x04</c>: set to 1 if its an actor
-		int32_t m_numSubMeshDesc;///< <c>0x08</c>: 0x1
-		uint32_t m_numA0_Structs;///< <c>0x0C</c>: 0x2
-		uint32_t m_numMaterials;///< <c>0x10</c>: 0x2
-		uint32_t m_numTextures;///< <c>0x14</c>: 0x6
-		uint32_t m_numShaders;///< <c>0x18</c>: 0x1
-		uint32_t m_unk6;///< <c>0x1C</c>: always 0 ?
-		uint32_t m_unk7;///< <c>0x20</c>: 0x5
-		uint32_t m_unk8;///< <c>0x24</c>: 0x8
-		SubMeshDesc* m_pSubMeshDescTable;///< <c>0x28</c>: 
-		unkStruct_0xA0** m_unkPtr2_elemSize_0xA0;///< <c>0x30</c>:
-		void* m_papTransform;///< <c>0x38</c>: m_paTransform;
-		void* m_pTextureStuff;///< <c>0x40</c>:
-		MaterialInstanceDesc* m_paMaterialInstanceDesc;///< <c>0x48</c>: array of MaterialInstanceDesc
-		void* m_unkPtr6_elemSize_0x130;///< <c>0x48</c>:
+		uint32_t m_version;								///< <c>0x00</c>: always 0x35 ?
+		uint32_t m_isForeground;						///< <c>0x04</c>: set to 1 if its an actor
+		int32_t m_numSubMeshDesc;						///< <c>0x08</c>: 
+		uint32_t m_numA0_Structs;						///< <c>0x0C</c>: 
+		uint32_t m_numMaterials;						///< <c>0x10</c>: 
+		uint32_t m_numTextures;							///< <c>0x14</c>: 
+		uint32_t m_numShaders;							///< <c>0x18</c>: 
+		uint32_t m_unk6;								///< <c>0x1C</c>: always 0 ?
+		uint32_t m_unk7;								///< <c>0x20</c>: 
+		uint32_t m_unk8;								///< <c>0x24</c>: 
+		SubMeshDesc* m_pSubMeshDescTable;				///< <c>0x28</c>: 
+		unkStruct_0xA0** m_unkPtr2_elemSize_0xA0;		///< <c>0x30</c>:
+		void* m_papTransform;							///< <c>0x38</c>: m_paTransform;
+		void* m_pTextureStuff;							///< <c>0x40</c>:
+		MaterialInstanceDesc* m_paMaterialInstanceDesc;	///< <c>0x48</c>: array of MaterialInstanceDesc
+		void* m_unkPtr6_elemSize_0x130;					///< <c>0x48</c>:
 	};
 
 	struct SubMeshDesc//0xB0; 

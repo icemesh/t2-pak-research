@@ -8,6 +8,7 @@
 #include "package-def.h"
 #include "../pak-entries/spawner-group.h"
 #include "../pak-entries/geometry1.h"
+#include "../pak-entries/texture-dictionary.h"
 #include "../utils/stringid.h"
 
 #include <immintrin.h>
@@ -48,6 +49,7 @@ Package::Package(const char* pakName)
 	{
 		fseek(fh, 0x0, SEEK_END);
 		size_t fsize = ftell(fh);
+		m_fileSize = fsize;
 		fseek(fh, 0x0, SEEK_SET);
 		void* pFile = malloc(fsize);
 		if (pFile)
@@ -91,7 +93,7 @@ int Package::PackageLogin()
 				case PackageStatus::kPackageStatusLoadingPakHeader:
 				{
 					uint32_t magic = ReadU32(&pHdr->m_magic);
-					if (magic == 0xA79)
+					if (magic == 0xA79 || magic == 0x10A79) // normal or -dict.pak
 					{
 						if (ReadU32(&pHdr->m_pageCt) < LoadingHeap::kBigPs3MaxPages)
 						{
@@ -111,8 +113,7 @@ int Package::PackageLogin()
 #endif
 								pCurrentPage++;
 							}
-							//m_textureBaseOffset = m_hdr.m_hdrSize + m_hdr.m_pageCt << 19;//m_hdr.m_pageCt*LoadingHeap::s_PageSize
-							m_textureBaseOffset = m_hdr.m_hdrSize + m_hdr.m_pageCt * LoadingHeap::s_PageSize;
+							m_textureBaseOffset = m_fileSize - pHdr->m_dataSize;
 							m_status = PackageStatus::kPackageStatusLoadingPages;
 						}
 						else
@@ -330,6 +331,12 @@ bool Login(ResItem* pResItem, ResPage* pResPage, Package* pPackage)
 		case SID("GEOMETRY_1"):
 		{
 			Geometry1::DumpInfo(reinterpret_cast<uint8_t*>(pResItem) + 0x30);
+			break;
+		}
+
+		case SID("TEXTURE_DICTIONARY"):
+		{
+			TextureDictionary::DumpInfo(reinterpret_cast<uint8_t*>(pResItem) + 0x30, pPackage);
 			break;
 		}
 
