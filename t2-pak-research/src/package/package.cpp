@@ -63,6 +63,7 @@ Package::Package(const char* pakName)
 		else
 		{
 			MsgErr("Failed to allocate file");
+			fclose(fh);
 		}
 	}
 	else
